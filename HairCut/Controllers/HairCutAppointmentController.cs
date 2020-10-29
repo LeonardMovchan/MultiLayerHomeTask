@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using HairCut.Data.Models;
+﻿using AutoMapper;
 using HairCut.Domain;
 using HairCut.Domain.Models;
 using HairCut.Models.PostModels;
+using System;
 namespace HairCut.Controllers
 {
     public class HairCutAppointmentController
     {
         private readonly HairCutService _hairCutService;
         private readonly IMapper _mapper;
+        private int MinTimeBeforeAppointment { get; set; }
         public HairCutAppointmentController()
         {
             _hairCutService = new HairCutService();
@@ -27,20 +23,21 @@ namespace HairCut.Controllers
 
         public void CreateHairCutRequest(CreateHairCutAppointmentPostModel model)
         {
-            //var hairCutAppointmentModel = new HairCutAppointmentModel()
-            //{
-            //    Id = model.Id,
-            //    Date = model.Date,
-            //    Phone = model.Phone,
-            //    Barber = model.Barber,
-            //    FullName = model.FullName,
-            //    HairCutStyle = model.HairCutStyle
-
-            //};
+            if (string.IsNullOrWhiteSpace(model.Phone))
+                throw new Exception("Phone number is reuqired to make a reservation");
+            if (string.IsNullOrWhiteSpace(model.FullName))
+                throw new Exception("Full Name is required to make a reservation");
+            if (model.Date < DateTime.UtcNow.AddHours(MinTimeBeforeAppointment))
+                throw new Exception("Our barbers need some time to prepare");
 
             var hairCutAppointment = _mapper.Map<HairCutAppointmentModel>(model);
 
             _hairCutService.CreateHairCutRequest(hairCutAppointment);
+        }
+
+        public void MinTimeInHoursBeforeAppointmenet(int time)
+        {
+            MinTimeBeforeAppointment = time;
         }
     }
 }

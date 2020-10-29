@@ -13,10 +13,11 @@ namespace MultiLayerHometask
         static void Main(string[] args)
         {
             var controller = new HairCutAppointmentController();
+            controller.MinTimeInHoursBeforeAppointmenet(2);
 
             var model = new CreateHairCutAppointmentPostModel
             {
-                Date = DateTime.UtcNow,
+                Date = DateTime.UtcNow.AddDays(1),
                 FullName = "James Cameron",
                 Phone = "+38093445520",
                 Barber = "Jason Statham",

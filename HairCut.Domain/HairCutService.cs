@@ -1,34 +1,28 @@
-﻿using HairCut.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HairCut.Data;
-using HairCut.Data.Repositories;
+﻿using AutoMapper;
 using HairCut.Data.Models;
-using AutoMapper;
+using HairCut.Data.Repositories;
+using HairCut.Domain.Models;
 namespace HairCut.Domain
 {
     public class HairCutService
     {
         private readonly HairCutAppointmentRepository _hairCutAppointmentRepository;
+        private readonly IMapper _mapper;
         public HairCutService()
         {
             _hairCutAppointmentRepository = new HairCutAppointmentRepository();
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<HairCutAppointmentModel, HairCutAppointment>().ReverseMap();
+
+            });
+            _mapper = new Mapper(mapperConfig);
         }
 
         public void CreateHairCutRequest(HairCutAppointmentModel model)
         {
-            var hairCutAppointmenet = new HairCutAppointment()
-            {
-                Id = model.Id,
-                Date = model.Date,
-                Phone = model.Phone,
-                Barber = model.Barber,
-                FullName = model.FullName,
-                HairCutStyle = model.HairCutStyle
-            };
+          
+            var hairCutAppointmenet = _mapper.Map<HairCutAppointment>(model);
 
             _hairCutAppointmentRepository.Create(hairCutAppointmenet);
         }

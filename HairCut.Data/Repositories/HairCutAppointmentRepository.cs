@@ -17,8 +17,12 @@ namespace HairCut.Data.Repositories
         }
         public void Create(HairCutAppointment model)
         {
-
             hairCutAppointments.Add(model);
+        }
+
+        public HairCutAppointment GetById(int id)
+        {
+            return null;
         }
     }
 }
