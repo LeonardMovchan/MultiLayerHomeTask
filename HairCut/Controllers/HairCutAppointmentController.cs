@@ -9,7 +9,7 @@ namespace HairCut.Controllers
     {
         private readonly HairCutService _hairCutService;
         private readonly IMapper _mapper;
-        private int MinTimeBeforeAppointment { get; set; }
+        public int MinTimeBeforeAppointment { get; set; }
         public HairCutAppointmentController()
         {
             _hairCutService = new HairCutService();
@@ -35,9 +35,6 @@ namespace HairCut.Controllers
             _hairCutService.CreateHairCutRequest(hairCutAppointment);
         }
 
-        public void MinTimeInHoursBeforeAppointmenet(int time)
-        {
-            MinTimeBeforeAppointment = time;
-        }
+     
     }
 }
