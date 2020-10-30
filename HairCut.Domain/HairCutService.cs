@@ -6,11 +6,11 @@ namespace HairCut.Domain
 {
     public class HairCutService
     {
-        private readonly HairCutAppointmentRepository _hairCutAppointmentRepository;
+        private readonly HairCutAppointmentANRepository _hairCutAppointmentANRepository;
         private readonly IMapper _mapper;
         public HairCutService()
         {
-            _hairCutAppointmentRepository = new HairCutAppointmentRepository();
+            _hairCutAppointmentANRepository = new HairCutAppointmentANRepository();
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<HairCutAppointmentModel, HairCutAppointment>().ReverseMap();
@@ -24,7 +24,7 @@ namespace HairCut.Domain
           
             var hairCutAppointmenet = _mapper.Map<HairCutAppointment>(model);
 
-            _hairCutAppointmentRepository.Create(hairCutAppointmenet);
+            _hairCutAppointmentANRepository.Create(hairCutAppointmenet);
         }
     }
 }

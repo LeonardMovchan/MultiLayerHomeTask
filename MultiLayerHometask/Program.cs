@@ -1,10 +1,6 @@
 ﻿using HairCut.Controllers;
 using HairCut.Models.PostModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MultiLayerHometask
 {
@@ -13,21 +9,18 @@ namespace MultiLayerHometask
         static void Main(string[] args)
         {
             var controller = new HairCutAppointmentController();
-            controller.MinTimeInHoursBeforeAppointmenet(2);
+            controller.MinTimeBeforeAppointment = 0;
 
             var model = new CreateHairCutAppointmentPostModel
             {
-                Date = DateTime.UtcNow.AddDays(1),
+                Date = DateTime.Now,
                 FullName = "James Cameron",
                 Phone = "+38093445520",
                 Barber = "Jason Statham",
-                HairCutStyle = "Under Cut"
+                HairCutStyle = "Under Cut",                         
                 
             };
-
-            List<CreateHairCutAppointmentPostModel> lst = new List<CreateHairCutAppointmentPostModel>();
-
-            lst.Add(model);
+           
             controller.CreateHairCutRequest(model);
         }
     }

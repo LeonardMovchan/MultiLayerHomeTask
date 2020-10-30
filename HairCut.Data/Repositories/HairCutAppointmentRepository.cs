@@ -1,6 +1,6 @@
 ﻿using HairCut.Data.Models;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 
 namespace HairCut.Data.Repositories
 {
@@ -19,15 +19,10 @@ namespace HairCut.Data.Repositories
 
         public HairCutAppointment GetById(string id)
         {
-            var appointment = new HairCutAppointment();
-            foreach (var item in hairCutAppointments)
-            {
-                if (item.Id == id)
-                {
-                    appointment = item;
-                }                   
-            }
+            var appointment = hairCutAppointments
+                .FirstOrDefault(x => x.Id == id);                             
             return appointment;
-        }
+          
+        }   
     }
 }
