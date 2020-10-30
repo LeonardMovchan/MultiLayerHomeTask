@@ -2,6 +2,9 @@
 using HairCut.Data.Models;
 using HairCut.Data.Repositories;
 using HairCut.Domain.Models;
+using System.Collections;
+using System.Collections.Generic;
+
 namespace HairCut.Domain
 {
     public class HairCutService
@@ -25,6 +28,15 @@ namespace HairCut.Domain
             var hairCutAppointmenet = _mapper.Map<HairCutAppointment>(model);
 
             _hairCutAppointmentANRepository.Create(hairCutAppointmenet);
+        }
+
+        public IEnumerable<HairCutAppointmentModel> GetAll()
+        {
+            IEnumerable<HairCutAppointment> models = _hairCutAppointmentANRepository.GetAll();
+
+            var mappedModels = _mapper.Map<IEnumerable<HairCutAppointmentModel>>(models);
+
+            return mappedModels;
         }
     }
 }

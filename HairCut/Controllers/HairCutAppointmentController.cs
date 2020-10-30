@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
+using HairCut.Data.Models;
 using HairCut.Domain;
 using HairCut.Domain.Models;
 using HairCut.Models.PostModels;
+using HairCut.Models.ViewModels;
 using System;
+using System.Collections.Generic;
+
 namespace HairCut.Controllers
 {
     public class HairCutAppointmentController
@@ -15,7 +19,9 @@ namespace HairCut.Controllers
             _hairCutService = new HairCutService();
             var mapperConfig = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CreateHairCutAppointmentPostModel, HairCutAppointmentModel>().ReverseMap();
+                cfg.CreateMap<CreateHairCutAppointmentPostModel, HairCutAppointmentModel>();
+                cfg.CreateMap<HairCutAppointmentModel, HairCutAppointmentViewModel>();
+                
             
             });
             _mapper = new Mapper(mapperConfig);
@@ -35,6 +41,11 @@ namespace HairCut.Controllers
             _hairCutService.CreateHairCutRequest(hairCutAppointment);
         }
 
-     
+     public IEnumerable<HairCutAppointmentViewModel> GetAll()
+        {
+            IEnumerable<HairCutAppointmentModel> models = _hairCutService.GetAll();
+
+            return _mapper.Map<IEnumerable<HairCutAppointmentViewModel>>(models);
+        }
     }
 }

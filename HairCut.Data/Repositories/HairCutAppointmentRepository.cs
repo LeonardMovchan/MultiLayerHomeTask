@@ -17,7 +17,7 @@ namespace HairCut.Data.Repositories
             hairCutAppointments.Add(model);
         }
 
-        public HairCutAppointment GetById(string id)
+        public HairCutAppointment GetById(int id)
         {
             var appointment = hairCutAppointments
                 .FirstOrDefault(x => x.Id == id);                             

@@ -21,7 +21,9 @@ namespace MultiLayerHometask
                 
             };
            
-            controller.CreateHairCutRequest(model);
+            //controller.CreateHairCutRequest(model);
+
+            var allAppointments = controller.GetAll();
         }
     }
 }

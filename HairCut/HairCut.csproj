@@ -46,11 +46,10 @@
   <ItemGroup>
     <Compile Include="Controllers\HairCutAppointmentController.cs" />
     <Compile Include="Models\PostModels\CreateHairCutAppointmentPostModel.cs" />
+    <Compile Include="Models\ViewModels\HairCutAppointmentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\HairCut.Data\HairCut.Data.csproj">
       <Project>{8ba13289-754c-4b8b-9b6c-f5d3bf74367c}</Project>
