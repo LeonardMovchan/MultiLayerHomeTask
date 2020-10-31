@@ -1,19 +1,19 @@
 ﻿using AutoMapper;
+using HairCut.Data.Interfaces;
 using HairCut.Data.Models;
 using HairCut.Data.Repositories;
 using HairCut.Domain.Models;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace HairCut.Domain
 {
     public class HairCutService
     {
-        private readonly HairCutAppointmentANRepository _hairCutAppointmentANRepository;
+        private readonly IHairCutAppointmentRepository _hairCutAppointmentRepository;
         private readonly IMapper _mapper;
         public HairCutService()
         {
-            _hairCutAppointmentANRepository = new HairCutAppointmentANRepository();
+            _hairCutAppointmentRepository = new HairCutAppointmentDapperRepository();
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<HairCutAppointmentModel, HairCutAppointment>().ReverseMap();
@@ -27,16 +27,22 @@ namespace HairCut.Domain
           
             var hairCutAppointmenet = _mapper.Map<HairCutAppointment>(model);
 
-            _hairCutAppointmentANRepository.Create(hairCutAppointmenet);
+            _hairCutAppointmentRepository.Create(hairCutAppointmenet);
         }
 
         public IEnumerable<HairCutAppointmentModel> GetAll()
         {
-            IEnumerable<HairCutAppointment> models = _hairCutAppointmentANRepository.GetAll();
+            IEnumerable<HairCutAppointment> models = _hairCutAppointmentRepository.GetAll();
 
             var mappedModels = _mapper.Map<IEnumerable<HairCutAppointmentModel>>(models);
 
             return mappedModels;
+        }
+
+        public HairCutAppointmentModel GetById(int id)
+        {
+            HairCutAppointment model = _hairCutAppointmentRepository.GetById(id);
+            return _mapper.Map<HairCutAppointmentModel> (model);
         }
     }
 }

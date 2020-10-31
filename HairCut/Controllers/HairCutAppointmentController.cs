@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HairCut.Data.Models;
 using HairCut.Domain;
 using HairCut.Domain.Models;
 using HairCut.Models.PostModels;
@@ -46,6 +45,12 @@ namespace HairCut.Controllers
             IEnumerable<HairCutAppointmentModel> models = _hairCutService.GetAll();
 
             return _mapper.Map<IEnumerable<HairCutAppointmentViewModel>>(models);
+        }
+
+      public HairCutAppointmentViewModel GetById(int id)
+        {
+            HairCutAppointmentModel model = _hairCutService.GetById(id);
+            return _mapper.Map<HairCutAppointmentViewModel>(model);
         }
     }
 }

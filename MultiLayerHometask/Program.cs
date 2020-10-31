@@ -20,10 +20,11 @@ namespace MultiLayerHometask
                 HairCutStyle = "Under Cut",                         
                 
             };
-           
+
             //controller.CreateHairCutRequest(model);
 
             var allAppointments = controller.GetAll();
+            var appointment = controller.GetById(1);
         }
     }
 }
