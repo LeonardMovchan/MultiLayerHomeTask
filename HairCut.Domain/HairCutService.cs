@@ -27,8 +27,9 @@ namespace HairCut.Domain
         public void CreateHairCutRequest(HairCutAppointmentModel model)
         {
             var appointments = _hairCutAppointmentRepository.GetRecentAppointmentDates();
+            var MinTimeBeforeAppointmentInHours = 1;
 
-            if (appointments.Any(x => x.Date.AddHours(1) >= model.Date && x.Barber == model.Barber))
+            if (appointments.Any(x => x.Date.AddHours(MinTimeBeforeAppointmentInHours) >= model.Date && x.Barber == model.Barber))
                 throw new System.Exception("The date is already taken");
           
             var hairCutAppointmenet = _mapper.Map<HairCutAppointment>(model);

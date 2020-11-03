@@ -12,7 +12,7 @@ namespace HairCut.Controllers
     {
         private readonly HairCutService _hairCutService;
         private readonly IMapper _mapper;
-        public int MinTimeBeforeAppointment { get; set; }
+        public int MinTimeBeforeAppointmentInHours { get; set; }
         public HairCutAppointmentController()
         {
             _hairCutService = new HairCutService();
@@ -32,7 +32,7 @@ namespace HairCut.Controllers
                 throw new Exception("Phone number is reuqired to make a reservation");
             if (string.IsNullOrWhiteSpace(model.FullName))
                 throw new Exception("Full Name is required to make a reservation");
-            if (model.Date < DateTime.UtcNow.AddHours(MinTimeBeforeAppointment))
+            if (model.Date < DateTime.UtcNow.AddHours(MinTimeBeforeAppointmentInHours))
                 throw new Exception("Our barbers need some time to prepare");
 
             var hairCutAppointment = _mapper.Map<HairCutAppointmentModel>(model);

@@ -9,7 +9,7 @@ namespace MultiLayerHometask
         static void Main(string[] args)
         {
             var controller = new HairCutAppointmentController();
-            controller.MinTimeBeforeAppointment = 0;
+            controller.MinTimeBeforeAppointmentInHours = 0;
 
             var model = new CreateHairCutAppointmentPostModel
             {
