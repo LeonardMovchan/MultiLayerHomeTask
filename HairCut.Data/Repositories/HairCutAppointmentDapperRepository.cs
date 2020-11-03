@@ -53,5 +53,17 @@ namespace HairCut.Data.Repositories
                 return connection.QueryFirstOrDefault<HairCutAppointment>("SELECT apt.* FROM HairCutAppointments apt" + $" WHERE apt.Id = {id}");
             }
         }
+
+        public IEnumerable<HairCutAppointment> GetRecentAppointmentDates()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                return connection.Query<HairCutAppointment>("SELECT apt.Date, apt.Barber FROM HairCutAppointments apt" +
+                    $" WHERE apt.Date between GETDATE() AND DateAdd(DD,7,GETDATE())");
+            }
+
+        }
     }
 }

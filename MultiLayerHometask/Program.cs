@@ -13,18 +13,18 @@ namespace MultiLayerHometask
 
             var model = new CreateHairCutAppointmentPostModel
             {
-                Date = DateTime.Now,
-                FullName = "James Cameron",
-                Phone = "+38093445520",
-                Barber = "Jason Statham",
+                Date = DateTime.Now.AddMinutes(50),
+                FullName = "Phil Colinz",
+                Phone = "+31111111",
+                Barber = "Barbara Straizand",
                 HairCutStyle = "Under Cut",                         
                 
             };
 
-            //controller.CreateHairCutRequest(model);
+            controller.CreateHairCutRequest(model);
 
             var allAppointments = controller.GetAll();
-            var appointment = controller.GetById(1);
+            var appointment = controller.GetById(2);
         }
     }
 }

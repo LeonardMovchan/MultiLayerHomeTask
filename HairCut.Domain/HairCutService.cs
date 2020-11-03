@@ -4,6 +4,8 @@ using HairCut.Data.Models;
 using HairCut.Data.Repositories;
 using HairCut.Domain.Models;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HairCut.Domain
 {
@@ -24,6 +26,10 @@ namespace HairCut.Domain
 
         public void CreateHairCutRequest(HairCutAppointmentModel model)
         {
+            var appointments = _hairCutAppointmentRepository.GetRecentAppointmentDates();
+
+            if (appointments.Any(x => x.Date.AddHours(1) >= model.Date && x.Barber == model.Barber))
+                throw new System.Exception("The date is already taken");
           
             var hairCutAppointmenet = _mapper.Map<HairCutAppointment>(model);
 

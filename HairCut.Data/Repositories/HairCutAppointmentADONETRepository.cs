@@ -7,11 +7,11 @@ using System.Data.SqlClient;
 
 namespace HairCut.Data.Repositories
 {
-    public class HairCutAppointmentANRepository : IHairCutAppointmentRepository
+    public class HairCutAppointmentADONETRepository : IHairCutAppointmentRepository
     {
         private readonly string _connectionString;
 
-        public HairCutAppointmentANRepository()
+        public HairCutAppointmentADONETRepository()
         {
             _connectionString = "Data source=.;Initial Catalog = BarberShop; Integrated Security = true";
         }
@@ -95,6 +95,11 @@ namespace HairCut.Data.Repositories
                 reader.Close();
             }
             return result;
+        }
+
+        public IEnumerable<HairCutAppointment> GetRecentAppointmentDates()
+        {
+            throw new NotImplementedException();
         }
     }
 }

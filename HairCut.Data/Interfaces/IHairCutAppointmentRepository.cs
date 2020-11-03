@@ -9,5 +9,6 @@ namespace HairCut.Data.Interfaces
         IEnumerable<HairCutAppointment> GetAll();
         HairCutAppointment GetById(int id);
 
+        IEnumerable<HairCutAppointment> GetRecentAppointmentDates();
     }
 }
