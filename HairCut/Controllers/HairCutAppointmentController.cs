@@ -13,6 +13,7 @@ namespace HairCut.Controllers
         private readonly HairCutService _hairCutService;
         private readonly IMapper _mapper;
         public int MinTimeBeforeAppointmentInHours { get; set; }
+        public int MaxRangeForTheAppointmentInDays { get; set; }
         public HairCutAppointmentController()
         {
             _hairCutService = new HairCutService();
@@ -34,6 +35,8 @@ namespace HairCut.Controllers
                 throw new Exception("Full Name is required to make a reservation");
             if (model.Date < DateTime.UtcNow.AddHours(MinTimeBeforeAppointmentInHours))
                 throw new Exception("Our barbers need some time to prepare");
+            if (model.Date > DateTime.UtcNow.AddDays(MaxRangeForTheAppointmentInDays))
+                throw new Exception($"The appoinement should be schedulled within {MaxRangeForTheAppointmentInDays} period");
 
             var hairCutAppointment = _mapper.Map<HairCutAppointmentModel>(model);
 

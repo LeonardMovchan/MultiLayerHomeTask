@@ -8,7 +8,6 @@ namespace HairCut.Data.Interfaces
         HairCutAppointment Create(HairCutAppointment model);
         IEnumerable<HairCutAppointment> GetAll();
         HairCutAppointment GetById(int id);
-
         IEnumerable<HairCutAppointment> GetRecentAppointmentDates();
     }
 }

@@ -55,15 +55,13 @@ namespace HairCut.Data.Repositories
         }
 
         public IEnumerable<HairCutAppointment> GetRecentAppointmentDates()
-        {
-            var MaxRangeForTheAppointmentInDays = 7;
-
+        {         
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
                 return connection.Query<HairCutAppointment>("SELECT apt.Date, apt.Barber FROM HairCutAppointments apt" +
-                    $" WHERE apt.Date between GETDATE() AND DateAdd(DD,{MaxRangeForTheAppointmentInDays},GETDATE())");
+                    $" WHERE apt.Date > GETDATE()");
             }
 
         }

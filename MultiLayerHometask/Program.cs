@@ -10,13 +10,13 @@ namespace MultiLayerHometask
         {
             var controller = new HairCutAppointmentController();
             controller.MinTimeBeforeAppointmentInHours = 0;
-
+            controller.MaxRangeForTheAppointmentInDays = 7;
             var model = new CreateHairCutAppointmentPostModel
             {
-                Date = DateTime.Now.AddMinutes(50),
+                Date = DateTime.Now.AddHours(1),
                 FullName = "Phil Colinz",
                 Phone = "+31111111",
-                Barber = "Barbara Straizand",
+                Barber = "barbara Straizand",
                 HairCutStyle = "Under Cut",                         
                 
             };
